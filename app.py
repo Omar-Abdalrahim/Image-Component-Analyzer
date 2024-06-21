@@ -48,19 +48,19 @@ def analyze_image(image, model):
     for box in result.boxes:
         class_id = result.names[box.cls[0].item()]
         pos = box.xyxy[0].tolist()
-        cords = [round(x) for x in pos]
-        conf = round(box.conf[0].item(), 2)
+        coords  = [round(x) for x in pos]
+        Confedence = round(box.conf[0].item(), 2)
         
-        if conf >= confidence_threshold:
-            detected_labels.add((class_id, conf))
+        if Confedence >= confidence_threshold:
+            detected_labels.add((class_id, Confedence))
             
             # Draw rectangle and add label
-            draw.rectangle(cords, outline="red", width=3)
-            label = f"{class_id}: {conf}"
+            draw.rectangle(coords , outline="red", width=3)
+            label = f"{class_id}: {Confedence}"
             
-            text_size = textsize(label, font=font)
-            draw.rectangle([cords[0], cords[1] - text_size[1], cords[0] + text_size[0], cords[1]], fill="red")
-            draw.text((cords[0], cords[1] - text_size[1]), label, fill="white", font=font)
+            Size = textsize(label, font=font)
+            draw.rectangle([coords [0], coords [1] - Size[1], coords [0] + Size[0], coords [1]], fill="red")
+            draw.text((coords [0], coords [1] - Size[1]), label, fill="white", font=font)
             
     return list(detected_labels), image
 
