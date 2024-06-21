@@ -30,8 +30,6 @@ def textsize(text, font):
     return width, height
 
 def analyze_image(image, model):
-    image = image.convert("RGB")     # Convert image to RGB format
-        
     image_np = np.array(image)       # Convert image to numpy array
     
     result = model.predict(image)[0] # Perform object detection
